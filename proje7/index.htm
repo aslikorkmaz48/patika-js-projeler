@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dizi/Film Listesi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        
+        input,
+        textarea {
+            padding: 8px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 16px;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Dizi/Film Listesi</h2>
+        <label>Listeni virgülle ayırarak gir:</label>
+        <textarea id="seriesInput" rows="4" placeholder="Örnek: Firefly, The Mandalorian, Breaking Bad"></textarea>
+        <button onclick="showSeriesList()">Listele</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        // Arrow fonksiyon ile listeyi alt alta yazma
+        const seriesList = list => {
+            let output = '';
+            list.forEach((series, index) => {
+                output += `${index + 1}. ${series.trim()}\n`;
+            });
+            return output;
+        };
+
+        function showSeriesList() {
+            const input = document.getElementById("seriesInput").value;
+            if (!input) {
+                document.getElementById("result").innerText = "Lütfen bir liste girin!";
+                return;
+            }
+
+            const listArray = input.split(',');
+            const resultText = seriesList(listArray);
+            document.getElementById("result").innerText = resultText;
+        }
+    </script>
+</body>
+
+</html>

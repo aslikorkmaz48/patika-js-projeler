@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        
+        input[type="text"]:focus {
+            border-color: #e98208;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #e98208;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+            transition: 0.3s;
+        }
+        
+        button:hover {
+            background-color: #cf7000;
+        }
+        
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .clear-btn {
+            width: 100%;
+            margin-top: 20px;
+            background-color: #ff4d4d;
+            border-radius: 4px;
+        }
+        
+        .clear-btn:hover {
+            background-color: #e60000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Dynamic To-Do List</h1>
+        <form id="item-form">
+            <input id="item" type="text" placeholder="Add new item..." required>
+            <button type="submit">Add</button>
+        </form>
+
+        <ul id="item-list"></ul>
+
+        <button class="clear-btn" id="clear-btn">Clear All</button>
+    </div>
+
+    <script>
+        const form = document.getElementById('item-form');
+        const ul = document.getElementById('item-list');
+        const input = document.getElementById('item');
+        const clearBtn = document.getElementById('clear-btn');
+
+        // Local storage kontrolü
+        let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
+        localStorage.setItem('items', JSON.stringify(itemsArray));
+
+        const data = JSON.parse(localStorage.getItem('items'));
+
+        // Liste elemanı ekleme fonksiyonu
+        const liMaker = (text) => {
+            const li = document.createElement('li');
+            li.textContent = text;
+            ul.appendChild(li);
+        }
+
+        // Mevcut verileri ekrana yaz
+        data.forEach(item => liMaker(item));
+
+        // Form submit event
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const value = input.value.trim();
+            if (value) {
+                itemsArray.push(value);
+                localStorage.setItem('items', JSON.stringify(itemsArray));
+                liMaker(value);
+                input.value = "";
+            }
+        });
+
+        // Clear All button
+        clearBtn.addEventListener('click', function() {
+            localStorage.clear();
+            while (ul.firstChild) {
+                ul.removeChild(ul.firstChild);
+            }
+            itemsArray = [];
+        });
+    </script>
+</body>
+
+</html>

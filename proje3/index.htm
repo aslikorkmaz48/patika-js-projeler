@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayı Tahmin Oyunu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            padding: 30px;
+        }
+        
+        .container {
+            background: #fff;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        input {
+            padding: 10px;
+            width: 80%;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            text-align: center;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #218838;
+        }
+        
+        #sonuc {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Sayı Tahmin Oyunu</h2>
+        <p>Bilgisayar 1 ile 10 arasında bir sayı tuttu. Tahmin et!</p>
+        <input type="number" id="tahmin" min="1" max="10" placeholder="1-10 arası sayı">
+        <br>
+        <button onclick="tahminEt()">Tahmin Et</button>
+        <div id="sonuc"></div>
+    </div>
+
+    <script>
+        // Bilgisayarın tuttuğu rastgele sayı (1-10)
+        const gizliSayi = Math.floor(Math.random() * 10) + 1;
+
+        function tahminEt() {
+            const tahmin = parseInt(document.getElementById("tahmin").value);
+            const sonucDiv = document.getElementById("sonuc");
+
+            if (isNaN(tahmin) || tahmin < 1 || tahmin > 10) {
+                sonucDiv.innerText = "Lütfen 1 ile 10 arasında bir sayı girin!";
+                return;
+            }
+
+            if (tahmin === gizliSayi) {
+                sonucDiv.innerText = `🎉 Tebrikler! Doğru tahmin: ${gizliSayi}`;
+            } else if (tahmin < gizliSayi) {
+                sonucDiv.innerText = "Daha büyük bir sayı dene!";
+            } else {
+                sonucDiv.innerText = "Daha küçük bir sayı dene!";
+            }
+        }
+    </script>
+</body>
+
+</html>

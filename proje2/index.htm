@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Büyük Sayıyı Bul</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f0f8ff;
+        }
+        
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        #sonuc {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Büyük Sayıyı Bul</h2>
+        <label for="sayi1">Birinci Sayı:</label>
+        <input type="number" id="sayi1" placeholder="Bir sayı girin">
+
+        <label for="sayi2">İkinci Sayı:</label>
+        <input type="number" id="sayi2" placeholder="Bir sayı girin">
+
+        <button onclick="buyukSayiyiBul()">Hesapla</button>
+
+        <div id="sonuc"></div>
+    </div>
+
+    <script>
+        function buyukSayiyiBul() {
+            const x = parseFloat(document.getElementById("sayi1").value);
+            const y = parseFloat(document.getElementById("sayi2").value);
+            const sonucDiv = document.getElementById("sonuc");
+
+            if (isNaN(x) || isNaN(y)) {
+                sonucDiv.innerText = "Lütfen geçerli sayılar girin!";
+                return;
+            }
+
+            if (x > y) {
+                sonucDiv.innerText = `${x} sayısı ${y} sayısından büyüktür.`;
+            } else if (y > x) {
+                sonucDiv.innerText = `${y} sayısı ${x} sayısından büyüktür.`;
+            } else {
+                sonucDiv.innerText = `İki sayı eşittir: ${x} = ${y}`;
+            }
+        }
+    </script>
+</body>
+
+</html>

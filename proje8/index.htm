@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array İşleme</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        
+        input {
+            padding: 8px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #FF5722;
+            color: #fff;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #E64A19;
+        }
+        
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Array İşleme</h2>
+        <label>Array'i virgülle ayırarak girin:</label>
+        <input type="text" id="arrayInput" placeholder="Örnek: 1,2,3,4,5">
+        <button onclick="processArray()">İşle</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        // Arrow fonksiyon ile array'i işleme
+        const transformArray = arr => {
+            return arr.map(num => num % 2 === 0 ? num * 2 : num * 3);
+        };
+
+        function processArray() {
+            const input = document.getElementById("arrayInput").value;
+            if (!input) {
+                document.getElementById("result").innerText = "Lütfen array girin!";
+                return;
+            }
+
+            con

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toplama Fonksiyonu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        
+        input {
+            padding: 8px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>İki Sayıyı Topla</h2>
+        <label>Sayı 1:</label>
+        <input type="number" id="num1" placeholder="Bir sayı girin">
+        <label>Sayı 2:</label>
+        <input type="number" id="num2" placeholder="Bir sayı girin">
+        <button onclick="addNumbers()">Topla</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        // Fonksiyon tanımı
+        function addNumbers() {
+            const number1 = parseFloat(document.getElementById("num1").value);
+            const number2 = parseFloat(document.getElementById("num2").value);
+
+            if (isNaN(number1) || isNaN(number2)) {
+                document.getElementById("result").innerText = "Lütfen geçerli sayılar girin!";
+                return;
+            }
+
+            // Toplama işlemi ve değişkene atama
+            const sum = number1 + number2;
+
+            document.getElementById("result").innerText = `Toplam: ${sum}`;
+        }
+    </script>
+</body>
+
+</html>

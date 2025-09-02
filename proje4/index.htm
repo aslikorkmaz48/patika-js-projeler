@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vücut Kitle İndeksi Hesaplama</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f8ff;
+            padding: 30px;
+        }
+        
+        .container {
+            background: #fff;
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            text-align: center;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        #sonuc {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Vücut Kitle İndeksi Hesaplama</h2>
+        <p>Kilonuzu (kg) ve boyunuzu (metre cinsinden, örn: 1.70) giriniz.</p>
+
+        <input type="number" id="kilo" placeholder="Kilonuzu giriniz (kg)">
+        <input type="number" id="boy" placeholder="Boyunuzu giriniz (örn: 1.70)" step="0.01">
+
+        <button onclick="vkiHesapla()">Hesapla</button>
+
+        <div id="sonuc"></div>
+    </div>
+
+    <script>
+        function vkiHesapla() {
+            const weight = parseFloat(document.getElementById("kilo").value);
+            const height = parseFloat(document.getElementById("boy").value);
+            const sonucDiv = document.getElementById("sonuc");
+
+            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+                sonucDiv.innerText = "Lütfen geçerli değerler giriniz!";
+                return;
+            }
+
+            // Formül: kg / (m * m)
+            const vki = weight / (height * height);
+            let mesaj = "";
+
+            if (vki < 18.5) {
+                mesaj = `Vücut kitle indeksiniz: ${vki.toFixed(2)} - Değerleriniz düşüktür (Zayıf).`;
+            } else if (vki >= 18.5 && vki <= 24.9) {
+                mesaj = `Vücut kitle indeksiniz: ${vki.toFixed(2)} - Normal değerdesiniz.`;
+            } else if (vki >= 25.0 && vki <= 29.9) {
+                mesaj = `Vücut kitle indeksiniz: ${vki.toFixed(2)} - Kilolusunuz.`;
+            } else if (vki >= 30) {
+                mesaj = `Vücut kitle indeksiniz: ${vki.toFixed(2)} - Aşırı kilolusunuz (Obez).`;
+            } else {
+                mesaj = "Girdiğiniz değerleri kontrol ediniz!";
+            }
+
+            sonucDiv.innerText = mesaj;
+        }
+    </script>
+</body>
+
+</html>

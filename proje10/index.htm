@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validation Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-container {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      width: 350px;
+    }
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Kayıt Formu</h2>
+    <form id="myForm">
+      <div class="form-group">
+        <label for="name">İsim:</label>
+        <input type="text" id="name" placeholder="İsminizi girin">
+        <div class="error" id="nameError"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-mail:</label>
+        <input type="text" id="email" placeholder="E-mail adresinizi girin">
+        <div class="error" id="emailError"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="age">Yaş:</label>
+        <input type="number" id="age" placeholder="Yaşınızı girin">
+        <div class="error" id="ageError"></div>
+      </div>
+
+      <button type="submit">Gönder</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("myForm");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault(); // Formun otomatik gönderilmesini engeller
+      let isValid = true;
+
+      // İsim
+      const name = document.getElementById("name").value.trim();
+      const nameError = document.getElementById("nameError");
+      if (name.length < 3) {
+        nameError.textContent = "İsim en az 3 karakter olmalı.";
+        isValid = false;
+      } else {
+        nameError.textContent = "";
+      }
+
+      // Email
+      const email = document.getElementById("email").value.trim();
+      const emailError = document.getElementById("emailError");
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!email.match(emailPattern)) {
+        emailError.textContent = "Geçerli bir e-mail adresi girin.";
+        isValid = false;
+      } else {
+        emailError.textContent = "";
+      }
+
+      // Yaş
+      const age = document.getElementById("age").value.trim();
+      const ageError = document.getElementById("ageError");
+      if (age === "" || isNaN(age) || age < 18) {
+        ageError.textContent = "Yaşınızı doğru girin (18+).";
+        isValid = false;
+      } else {
+        ageError.textContent = "";
+      }
+
+      // Eğer her şey doğruysa
+      if (isValid) {
+        alert("Form başarıyla gönderildi!");
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>

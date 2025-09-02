@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Placeholder Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        #userList {
+            margin-top: 20px;
+            list-style: none;
+            padding: 0;
+        }
+        
+        #userList li {
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>JSON Placeholder Users</h1>
+    <ul id="userList"></ul>
+
+    <script>
+        const apiUrl = 'https://jsonplaceholder.typicode.com/users';
+        const userList = document.getElementById('userList');
+
+        // fetch ile API'den kullanıcıları al
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.status);
+                }
+                return response.json();
+            })
+            .then(users => {
+                    console.log(users); // Console'da da yazdır
+
+                    // Her kullanıcıyı listeye ekle
+                    users.forEach(user => {
+                                const li = document.createElement('li');
+                                li.textContent
